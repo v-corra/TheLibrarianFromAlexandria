@@ -1,10 +1,10 @@
 # Font Recognition System – "The Librarian from Alexandria"
 
 - In order to execute the code install a virtual enviroment and the packages in the requirements.txt file. 
-pip install virtualenv
-virtualenv venv
-source venv/Scripts/activate
-pip install -r requirements
+-- pip install virtualenv
+-- virtualenv venv
+-- source venv/Scripts/activate
+-- pip install -r requirements
 
 ## 👥 Team Members
 - Corrado Valeri 

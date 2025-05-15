@@ -12,13 +12,13 @@
 
 ---
 
-## 📘 [Section 1] Introduction
+## 📘 Introduction
 
 This project aims to create a deep learning-based font classification system for historical documents. The system processes a set of scanned text images and classifies them into one of 11 ancient font categories. The ultimate goal is to contribute a robust model that can aid in the automatic digitization and indexing of historical archives using machine learning.
 
 ---
 
-## 🧪 [Section 2] Methods
+## 🧪 Methods
 
 ### 🔧 Design Overview
 The approach is divided into three core modules:
@@ -50,7 +50,7 @@ This ensures better generalization and robustness of the trained model.
 
 ---
 
-## 🧫 [Section 3] Experimental Design
+## 🧫 Experimental Design
 
 ### 🎯 Purpose
 To train a classifier capable of distinguishing 11 distinct font styles from historical scanned images.
@@ -68,7 +68,7 @@ Metrics were computed per epoch for both training and testing sets.
 
 ---
 
-## 📈 [Section 4] Results
+## 📈 Results
 
 ### 🔍 Main Findings
 - ResNet50 achieved high classification performance with accuracy surpassing 90% on the test set.
@@ -89,16 +89,15 @@ Metrics were computed per epoch for both training and testing sets.
 
 ---
 
-## 🧾 [Section 5] Conclusions
+## 🧾 Conclusions
 
-The model demonstrates the feasibility of using deep learning techniques to classify historical fonts with strong generalization across diverse document structures. The data augmentation techniques were pivotal in compensating for the relatively small dataset.
+The model demonstrates the feasibility of using deep learning techniques to classify historical fonts with strong generalization across diverse document structures. 
+The data augmentation techniques were pivotal in compensating for the relatively small dataset.
 
 ---
 
 ### 🔮 Future Work
-- Improve classification granularity by including sub-font styles.
-- Incorporate OCR for text-line segmentation prior to classification.
-- Expand dataset diversity across languages/scripts.
+In the repository, there is an additional script that we were unable to test due to time constraints and limited computational resources. This alternative version includes all the data transformations and integrates the validation set into the model analysis for a more comprehensive evaluation.
 
 ---
 

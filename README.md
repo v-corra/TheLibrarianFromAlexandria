@@ -1,86 +1,112 @@
-# Font Classification with CNN and Transfer Learning
+# Font Recognition System – "The Librarian from Alexandria"
 
-## Title:
-**Font Classification Using Convolutional Neural Networks (CNN)**
+- In order to execute the code install a virtual enviroment and the packages in the requirements.txt file. 
+# [pip install virtualenv]
+# [virtualenv venv]
+# [source venv/Scripts/activate]
+# [pip install -r requirements]
 
-## Team Members:
-- Corrado Valeri
+## 👥 Team Members
+- Corrado Valeri 
 - Michele Baldo
 
+---
+
+## 📘 [Section 1] Introduction
+
+This project aims to create a deep learning-based font classification system for historical documents. The system processes a set of scanned text images and classifies them into one of 11 ancient font categories. The ultimate goal is to contribute a robust model that can aid in the automatic digitization and indexing of historical archives using machine learning.
 
 ---
 
-## [Section 1] Introduction:
-This project focuses on using **Convolutional Neural Networks (CNNs)**, specifically a **ResNet50 pre-trained model**, for the task of classifying fonts in images. The dataset consists of 1250 images of different fonts, and our goal is to train a CNN model to classify the fonts based on these images. We applied various **preprocessing techniques**, including **data augmentation** and **denoising**, to improve model performance.
+## 🧪 [Section 2] Methods
+
+### 🔧 Design Overview
+The approach is divided into three core modules:
+1. **Image Preprocessing** – Clean and enhance the scanned images.
+2. **Data Augmentation** – Expand the dataset through synthetic variations (Due to computing limitation we only saved the last tranfomration not accomplishing the real goal of dataaugmentation but still giving varaitions that helped the training phase).
+3. **Model Training** – Utilize a pre-trained ResNet50 model based on ImageNet Dataset  for classification.
+
+### 🛠 Environment
+- Python 3.10+
+- PyTorch, torchvision, pandas, scikit-learn, seaborn
+- Compatible with both GPU and CPU environments
+- Required setup: `conda` environment or `requirements.txt` listing all dependencies
+
+### 📊 Preprocessing Pipeline
+Each scanned image is:
+- Converted to grayscale
+- Binarized via a threshold
+- Denoised using a Median filter
+- Saved in `immagini_formattate`
+
+### 🧬 Data Augmentation
+For every denoised image:
+- Affine transformations (translation, flip, brightness/contrast jitter)
+- Gaussian noise addition
+- Elastic distortion applied
+- Saved in `immagini_reteneurale`
+
+This ensures better generalization and robustness of the trained model.
 
 ---
 
-## [Section 2] Methods:
+## 🧫 [Section 3] Experimental Design
 
-### 1. **Data Preprocessing**:
-   - **Grayscale Conversion**: The images are converted to grayscale using `PIL` to reduce complexity.
-   - **Binarization**: Each image is binarized by applying a threshold to create a high contrast image.
-   - **Denoising**: A median filter is applied to remove noise from the binary image.
-   - **Data Augmentation**: Random rotations, flips, and color jitter are applied to enhance the dataset, making the model more robust.
+### 🎯 Purpose
+To train a classifier capable of distinguishing 11 distinct font styles from historical scanned images.
 
-### 2. **Data Augmentation**:
-   - **RandomAffine**: Applied random translation of up to 10%.
-   - **RandomFlip**: Random horizontal and vertical flips.
-   - **ColorJitter**: Random changes in brightness and contrast.
-   
-   These augmentations help simulate variations of font images to ensure the model generalizes well to new images.
+### 🔁 Baseline
+No pretrained classifier was used as a benchmark; instead, the performance of the ResNet50 fine-tuned head was evaluated directly.
 
-### 3. **CNN Architecture (ResNet50)**:
-   - **Transfer Learning**: We used **ResNet50**, a model pre-trained on **ImageNet**. The model is modified by replacing its final classification layer to match the number of classes in our dataset (the number of unique fonts).
-   - **Training**: We fine-tuned the last fully connected layer while freezing the weights of the pre-trained layers to retain learned features.
-   - **Loss Function**: **CrossEntropyLoss** was used for multi-class classification.
-   - **Optimizer**: **SGD** with a learning rate of **0.002** and momentum **0.9**.
+### 🧮 Evaluation Metrics
+- **Accuracy**
+- **Precision**
+- **Recall**
+- **F1-Score**
+
+Metrics were computed per epoch for both training and testing sets.
 
 ---
 
-## [Section 3] Experimental Design:
+## 📈 [Section 4] Results
 
-### Purpose:
-- **Main Goal**: To classify fonts in images using CNNs and Transfer Learning with ResNet50.
-- **Baseline**: We compare our results against a **baseline** using a simple CNN model and no data augmentation.
+### 🔍 Main Findings
+- ResNet50 achieved high classification performance with accuracy surpassing 90% on the test set.
+- Model overfitting was mitigated using Early Stopping and Data Augmentation.
+- Precision/Recall/F1-Score metrics were stable across epochs.
 
-### Metrics:
-- **Accuracy**: The primary metric for evaluating the performance of the model on the training and test sets.
-- **Loss**: Monitored using **CrossEntropyLoss** to ensure the model is learning effectively.
+### 📉 Example Figures and Tables
+#### ✅ Training/Test Accuracy per Epoch
+![Training/Test Accuracy](model_results/training_and_accuracy_charts_18.png)
 
----
+#### 📊 Precision / Recall / F1 per Epoch
+![Metrics per Epoch](model_results/precision_recall_f1_charts_18.png)
 
-## [Section 4] Results:
+#### 📌 Confusion Matrix
+![Confusion Matrix](model_results/confusion_matirx_18_35.png)
 
-### 1. **Training Loss and Accuracy**:
-   - The training loss decreased steadily with each epoch, indicating that the model was learning the features associated with the fonts.
-   - The accuracy for the training set increased, showing that the model was able to correctly classify the fonts in the training data.
-   
-   ![Training and Accuracy Graph](images/training_and_accuracy_graph.png)
-
-### 2. **Test Accuracy**:
-   - After training, the model was evaluated on a held-out test set to assess its ability to generalize. The test accuracy was **X%**, indicating good performance.
-
-   ![Test Accuracy](images/test_accuracy.png)
-
-### 3. **Results File**:
-   - The results are saved in an Excel file that includes the training and test accuracies for each epoch. It also includes a graphical representation of the training process.
-
-   ![Training Results](images/training_results.png)
+> Note: All visualizations are generated programmatically and saved in `model_results/`.
 
 ---
 
-## [Section 5] Conclusions:
+## 🧾 [Section 5] Conclusions
 
-### Summary:
-This project successfully applied CNNs with Transfer Learning to classify font types in images. The model performed well with a final test accuracy of **X%**, and by using data augmentation and fine-tuning a pre-trained ResNet50 model, we were able to achieve significant performance improvements with relatively small data.
-
-### Future Work:
-- **Increasing Dataset Size**: Expanding the dataset could help improve the generalization ability of the model.
-- **Improved Data Augmentation**: Experimenting with additional data augmentation techniques, such as more advanced image transformations, could further boost model performance.
-- **Exploring Other CNN Architectures**: Using deeper models or lightweight models like **MobileNet** could be considered for better efficiency.
+The model demonstrates the feasibility of using deep learning techniques to classify historical fonts with strong generalization across diverse document structures. The data augmentation techniques were pivotal in compensating for the relatively small dataset.
 
 ---
 
-## Folder Structure:
+### 🔮 Future Work
+- Improve classification granularity by including sub-font styles.
+- Incorporate OCR for text-line segmentation prior to classification.
+- Expand dataset diversity across languages/scripts.
 
+---
+
+## 📓 Notebook Structure
+
+`main.ipynb` includes:
+- Detailed textual explanations before each code cell
+- Comments on model design choices
+- Clear documentation of all outputs, including visual results and metrics
+
+---
